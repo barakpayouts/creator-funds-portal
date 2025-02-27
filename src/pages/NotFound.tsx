@@ -23,8 +23,8 @@ const NotFound = () => {
         className="text-center max-w-md"
       >
         <h1 className="text-6xl font-bold text-accent mb-4">404</h1>
-        <p className="text-2xl text-primary-foreground mb-8">Page not found</p>
-        <p className="text-primary-foreground/70 mb-8">
+        <p className="text-2xl text-white mb-8">Page not found</p>
+        <p className="text-white/70 mb-8">
           The page you are looking for might have been removed, had its name changed,
           or is temporarily unavailable.
         </p>
@@ -32,7 +32,7 @@ const NotFound = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="bg-accent text-accent-foreground font-semibold py-3 px-6 rounded-md transition-colors duration-300 hover:bg-accent/90"
+            className="bg-accent text-primary font-semibold py-3 px-6 rounded-md transition-colors duration-300 hover:bg-accent/90"
           >
             Back to Homepage
           </motion.button>

@@ -5,35 +5,35 @@
 
 @layer base {
   :root {
-    /* New color based on #f9f6ed */
-    --primary: 48 33% 92%;
-    --primary-foreground: 196 66% 14%;
+    /* Dark teal background color from the provided image */
+    --primary: 196 66% 14%;
+    --primary-foreground: 0 0% 100%;
     
-    /* Adjusted accent color to complement the new primary */
+    /* Bright yellow-green accent color from the provided image */
     --accent: 71 100% 58%;
     --accent-foreground: 196 66% 14%;
 
-    /* Other variables adjusted to match the new color scheme */
-    --background: 48 33% 92%;
-    --foreground: 196 66% 14%;
+    /* Other variables maintained but adjusted to match the color scheme */
+    --background: 196 66% 14%;
+    --foreground: 0 0% 100%;
 
-    --card: 48 33% 95%;
-    --card-foreground: 196 66% 14%;
+    --card: 196 66% 12%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 48 33% 97%;
-    --popover-foreground: 196 66% 14%;
+    --popover: 196 66% 10%;
+    --popover-foreground: 0 0% 100%;
 
-    --secondary: 48 33% 85%;
-    --secondary-foreground: 196 66% 14%;
+    --secondary: 196 66% 20%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 48 15% 80%;
-    --muted-foreground: 196 66% 40%;
+    --muted: 196 30% 25%;
+    --muted-foreground: 0 0% 80%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 48 15% 80%;
-    --input: 48 15% 80%;
+    --border: 196 40% 25%;
+    --input: 196 40% 25%;
     --ring: 71 100% 58%;
 
     --radius: 0.75rem;
@@ -42,7 +42,7 @@
 
 @layer base {
   * {
-    @apply border-border selection:bg-accent/10 selection:text-accent-foreground;
+    @apply border-border selection:bg-accent/10 selection:text-accent;
   }
   
   body {
@@ -66,10 +66,10 @@
   }
 
   .glass-morphism {
-    @apply backdrop-blur-xl bg-primary-foreground/5 border border-black/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.1)];
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
   }
   
   .neo-blur {
-    @apply backdrop-blur-2xl bg-primary-foreground/10 border border-black/10;
+    @apply backdrop-blur-2xl bg-black/40 border border-white/10;
   }
 }
