@@ -321,17 +321,18 @@ const Index = () => {
         </div>
       </section>
       
-      {/* CTA Section */}
+      {/* CTA Section - Updated with #f9f6ed background */}
       <motion.section 
         variants={fadeInVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        className="py-16 md:py-24 px-6 lg:px-20 bg-accent/10 backdrop-blur-md border-y border-accent/20"
+        className="py-16 md:py-24 px-6 lg:px-20"
+        style={{ backgroundColor: "#f9f6ed" }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Creator Payouts?</h2>
-          <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">Ready to Transform Your Creator Payouts?</h2>
+          <p className="text-xl text-primary/80 mb-10 max-w-2xl mx-auto">
             Contact us today to learn how Payouts.com can revolutionize your global creator payout process!
           </p>
           
@@ -347,7 +348,7 @@ const Index = () => {
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="border border-accent/50 hover:border-accent text-white font-semibold py-3 px-8 rounded-md transition-colors duration-300 text-lg"
+              className="border border-primary/30 hover:border-primary text-primary font-semibold py-3 px-8 rounded-md transition-colors duration-300 text-lg"
             >
               Get a Customized Quote
             </motion.button>
