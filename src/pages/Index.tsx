@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 
 const Index = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const videoRef = useRef<HTMLIFrameElement>(null);
   
   // Animation variants
@@ -45,6 +46,11 @@ const Index = () => {
     },
   };
 
+  // Mobile menu
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   // Handle iframe load
   useEffect(() => {
     const handleIframeLoad = () => {
@@ -61,10 +67,10 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-primary text-white">
+    <div className="min-h-screen bg-primary text-foreground">
       {/* Navigation Bar */}
       <motion.nav 
-        className="py-4 px-6 lg:px-20 flex items-center justify-between"
+        className="py-4 px-6 lg:px-20 flex items-center justify-between relative z-50"
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -76,6 +82,8 @@ const Index = () => {
             className="h-8" 
           />
         </div>
+        
+        {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 text-sm font-medium">
           <a href="#" className="hover:text-accent transition-colors duration-300">Products</a>
           <a href="#" className="hover:text-accent transition-colors duration-300">Use cases</a>
@@ -84,19 +92,59 @@ const Index = () => {
           <a href="#" className="hover:text-accent transition-colors duration-300">Resources</a>
           <a href="#" className="hover:text-accent transition-colors duration-300">Pricing</a>
         </div>
+        
         <div className="flex items-center space-x-4">
-          <button className="text-white hover:text-accent transition-colors duration-300 text-sm font-medium hidden md:block">
+          <button className="text-primary-foreground hover:text-accent transition-colors duration-300 text-sm font-medium hidden md:block">
             Sign In
           </button>
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="bg-accent hover:bg-accent/90 text-primary font-semibold py-2 px-4 rounded-md text-sm transition-colors duration-300"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-2 px-4 rounded-md text-sm transition-colors duration-300"
           >
             Book a demo
           </motion.button>
+          
+          {/* Mobile menu button */}
+          <button 
+            className="md:hidden text-primary-foreground p-2"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>
+            )}
+          </button>
         </div>
       </motion.nav>
+
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.2 }}
+          className="md:hidden absolute z-40 top-16 left-0 right-0 bg-primary shadow-lg p-6 space-y-4 border-t border-border"
+        >
+          <a href="#" className="block py-2 text-foreground hover:text-accent transition-colors duration-300">Products</a>
+          <a href="#" className="block py-2 text-foreground hover:text-accent transition-colors duration-300">Use cases</a>
+          <a href="#" className="block py-2 text-foreground hover:text-accent transition-colors duration-300">Integrations</a>
+          <a href="#" className="block py-2 text-foreground hover:text-accent transition-colors duration-300">Company</a>
+          <a href="#" className="block py-2 text-foreground hover:text-accent transition-colors duration-300">Resources</a>
+          <a href="#" className="block py-2 text-foreground hover:text-accent transition-colors duration-300">Pricing</a>
+          <a href="#" className="block py-2 text-foreground hover:text-accent transition-colors duration-300">Sign In</a>
+        </motion.div>
+      )}
 
       {/* Hero Section */}
       <section className="py-16 md:py-24 px-6 lg:px-20 max-w-7xl mx-auto">
@@ -111,13 +159,13 @@ const Index = () => {
               variants={itemVariants}
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
             >
-              <span className="text-white">Unlock Seamless Global Creator Payouts:</span>{" "}
-              <span className="text-accent">Brainlabs x Payouts.com</span>
+              <span className="text-primary-foreground">Unlock Seamless Global Creator Payouts:</span>{" "}
+              <span className="text-accent-foreground">Brainlabs x Payouts.com</span>
             </motion.h1>
             
             <motion.p 
               variants={itemVariants}
-              className="text-xl text-white/80 mb-8 leading-relaxed"
+              className="text-xl text-primary-foreground/80 mb-8 leading-relaxed"
             >
               Automate Tax Compliance, Financial Reconciliation, and Scalable Growth for Your Global Creator Network.
             </motion.p>
@@ -129,7 +177,7 @@ const Index = () => {
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-accent hover:bg-accent/90 text-primary font-semibold py-3 px-6 rounded-md transition-colors duration-300"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 px-6 rounded-md transition-colors duration-300"
               >
                 Request a Demo
               </motion.button>
@@ -137,7 +185,7 @@ const Index = () => {
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="border border-accent/50 hover:border-accent text-white font-semibold py-3 px-6 rounded-md transition-colors duration-300"
+                className="border border-accent/50 hover:border-accent text-primary-foreground font-semibold py-3 px-6 rounded-md transition-colors duration-300"
               >
                 Get a Customized Quote
               </motion.button>
@@ -150,7 +198,7 @@ const Index = () => {
             animate="visible"
             className="order-1 md:order-2 relative aspect-video rounded-xl overflow-hidden shadow-2xl"
           >
-            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm rounded-xl transform -translate-x-4 translate-y-4 z-0"></div>
+            <div className="absolute inset-0 bg-primary-foreground/20 backdrop-blur-sm rounded-xl transform -translate-x-2 translate-y-2 md:-translate-x-4 md:translate-y-4 z-0"></div>
             <div className="relative z-10 rounded-xl overflow-hidden">
               <div style={{ padding: '56.25% 0 0 0', position: 'relative', borderRadius: '12px', overflow: 'hidden' }}>
                 <iframe 
@@ -181,7 +229,7 @@ const Index = () => {
         viewport={{ once: true, amount: 0.3 }}
         className="py-16 px-6 lg:px-20 max-w-4xl mx-auto text-center"
       >
-        <p className="text-xl leading-relaxed text-white/90">
+        <p className="text-xl leading-relaxed text-primary-foreground/90">
           As a global leader in digital marketing, Brainlabs understands the importance of efficient and reliable creator payments. Payouts.com offers a transformative solution, designed to integrate seamlessly with your existing workflows, eliminating manual effort, reducing costs, and empowering your global creator network to thrive.
         </p>
       </motion.section>
@@ -197,7 +245,7 @@ const Index = () => {
         >
           <motion.h2 
             variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold mb-6"
+            className="text-3xl md:text-4xl font-bold mb-6 text-primary-foreground"
           >
             Key Benefits
           </motion.h2>
@@ -216,20 +264,20 @@ const Index = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.3 } }}
-              className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 hover:border-accent/30 transition-all duration-300"
+              className="bg-primary-foreground/5 backdrop-blur-md p-8 rounded-2xl border border-black/10 hover:border-accent/30 transition-all duration-300"
             >
               <div className="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
-                <span className="text-accent text-3xl">{benefit.icon}</span>
+                <span className="text-accent-foreground text-3xl">{benefit.icon}</span>
               </div>
-              <h3 className="text-xl font-semibold mb-4">{benefit.title}</h3>
-              <p className="text-white/70 leading-relaxed">{benefit.description}</p>
+              <h3 className="text-xl font-semibold mb-4 text-primary-foreground">{benefit.title}</h3>
+              <p className="text-primary-foreground/70 leading-relaxed">{benefit.description}</p>
             </motion.div>
           ))}
         </div>
       </section>
       
       {/* Solution Details */}
-      <section className="py-16 md:py-24 px-6 lg:px-20 bg-white/5">
+      <section className="py-16 md:py-24 px-6 lg:px-20 bg-primary-foreground/5">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             variants={containerVariants}
@@ -240,7 +288,7 @@ const Index = () => {
           >
             <motion.h2 
               variants={itemVariants}
-              className="text-3xl md:text-4xl font-bold mb-6"
+              className="text-3xl md:text-4xl font-bold mb-6 text-primary-foreground"
             >
               Solution Details
             </motion.h2>
@@ -258,14 +306,14 @@ const Index = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
-                className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10"
+                className="bg-primary-foreground/5 backdrop-blur-md p-8 rounded-2xl border border-black/10"
               >
-                <h3 className="text-2xl font-semibold mb-6 text-accent">{solution.title}</h3>
+                <h3 className="text-2xl font-semibold mb-6 text-accent-foreground">{solution.title}</h3>
                 <ul className="space-y-4">
                   {solution.points.map((point, idx) => (
                     <li key={idx} className="flex items-start">
-                      <span className="text-accent mr-3 mt-1">•</span>
-                      <p className="text-white/80">{point}</p>
+                      <span className="text-accent-foreground mr-3 mt-1">•</span>
+                      <p className="text-primary-foreground/80">{point}</p>
                     </li>
                   ))}
                 </ul>
@@ -286,7 +334,7 @@ const Index = () => {
         >
           <motion.h2 
             variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold mb-6"
+            className="text-3xl md:text-4xl font-bold mb-6 text-primary-foreground"
           >
             What Brainlabs Can Expect
           </motion.h2>
@@ -296,13 +344,13 @@ const Index = () => {
           ></motion.div>
           <motion.p
             variants={itemVariants}
-            className="text-xl text-white/80 max-w-3xl mx-auto"
+            className="text-xl text-primary-foreground/80 max-w-3xl mx-auto"
           >
             Our platform transforms payment processes, giving you more time to focus on growth
           </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
           {expectations.map((expectation, index) => (
             <motion.div 
               key={index}
@@ -310,12 +358,12 @@ const Index = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 text-center hover:border-accent/30 transition-all duration-300"
+              className="bg-primary-foreground/5 backdrop-blur-md border border-black/10 rounded-xl p-4 md:p-6 text-center hover:border-accent/30 transition-all duration-300"
             >
-              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-accent text-2xl">{expectation.icon}</span>
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-accent-foreground text-xl md:text-2xl">{expectation.icon}</span>
               </div>
-              <h3 className="font-medium">{expectation.title}</h3>
+              <h3 className="font-medium text-sm md:text-base text-primary-foreground">{expectation.title}</h3>
             </motion.div>
           ))}
         </div>
@@ -330,8 +378,8 @@ const Index = () => {
         className="py-16 md:py-24 px-6 lg:px-20 bg-accent/10 backdrop-blur-md border-y border-accent/20"
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Creator Payouts?</h2>
-          <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-foreground">Ready to Transform Your Creator Payouts?</h2>
+          <p className="text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
             Contact us today to learn how Payouts.com can revolutionize your global creator payout process!
           </p>
           
@@ -339,7 +387,7 @@ const Index = () => {
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-accent hover:bg-accent/90 text-primary font-semibold py-3 px-8 rounded-md transition-colors duration-300 text-lg"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 px-8 rounded-md transition-colors duration-300 text-lg"
             >
               Request a Demo
             </motion.button>
@@ -347,7 +395,7 @@ const Index = () => {
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="border border-accent/50 hover:border-accent text-white font-semibold py-3 px-8 rounded-md transition-colors duration-300 text-lg"
+              className="border border-accent/50 hover:border-accent text-primary-foreground font-semibold py-3 px-8 rounded-md transition-colors duration-300 text-lg"
             >
               Get a Customized Quote
             </motion.button>
@@ -366,24 +414,24 @@ const Index = () => {
             />
             
             <div className="flex space-x-6">
-              <a href="#" className="text-white/70 hover:text-accent transition-colors duration-300">
+              <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
               </a>
-              <a href="#" className="text-white/70 hover:text-accent transition-colors duration-300">
+              <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
               </a>
             </div>
           </div>
           
-          <div className="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between">
-            <div className="text-white/50 text-sm mb-4 md:mb-0">
+          <div className="border-t border-black/10 pt-10 flex flex-col md:flex-row justify-between">
+            <div className="text-primary-foreground/50 text-sm mb-4 md:mb-0">
               © {new Date().getFullYear()} Payouts.com. All rights reserved.
             </div>
             
             <div className="flex flex-wrap gap-x-6 gap-y-2">
-              <a href="#" className="text-white/50 hover:text-accent text-sm transition-colors duration-300">Privacy Policy</a>
-              <a href="#" className="text-white/50 hover:text-accent text-sm transition-colors duration-300">Terms of Service</a>
-              <a href="#" className="text-white/50 hover:text-accent text-sm transition-colors duration-300">Contact Us</a>
+              <a href="#" className="text-primary-foreground/50 hover:text-accent text-sm transition-colors duration-300">Privacy Policy</a>
+              <a href="#" className="text-primary-foreground/50 hover:text-accent text-sm transition-colors duration-300">Terms of Service</a>
+              <a href="#" className="text-primary-foreground/50 hover:text-accent text-sm transition-colors duration-300">Contact Us</a>
             </div>
           </div>
         </div>
