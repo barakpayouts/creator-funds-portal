@@ -16,7 +16,7 @@ const NotFound = () => {
 
   // Create WhatsApp chat URL with the account manager
   const getWhatsAppLink = () => {
-    const message = "Hi Coral, I was browsing Payouts.com and came across a missing page. Can you help me find what I'm looking for?";
+    const message = "Hi Coral, it's [name] from Brainlabs. I encountered a 404 page on your site. I was trying to find information about integration options after our demo. Could you point me in the right direction?";
     return `https://wa.me/972545480039?text=${encodeURIComponent(message)}`;
   };
 
